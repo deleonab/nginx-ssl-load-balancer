@@ -71,7 +71,7 @@ www and elastic ip address
 Configure Nginx to recognize your new domain name
 Update your nginx.conf with server_name www.<your-domain-name.com> instead of server_name www.domain.com
 
-# run workachoo.com in the browser window
+## run workachoo.com in the browser window
 
 Our site shows up
 
@@ -86,32 +86,29 @@ sudo systemctl status snapd
 
 sudo snap install --classic certbot
 
-Request your certificate (just follow the certbot instructions – you will need to choose which domain you want your certificate to be issued for, domain name will be looked up from nginx.conf file so make sure you have updated it on step 4).
+### Request your certificate (just follow the certbot instructions – you will need to choose which domain you want your certificate to be issued for, domain name will be looked up from nginx.conf file so make sure you have updated it on step 4).
 
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 sudo certbot --nginx
-Test secured access to your Web Solution by trying to reach https://<your-domain-name.com>
 
-You shall be able to access your website by using HTTPS protocol (that uses TCP port 443) and see a padlock pictogram in your browser’s search string.
-Click on the padlock icon and you can see the details of the certificate issued for your website.
+###Test secured access to your Web Solution by trying to reach https://<your-domain-name.com>
+
+## Able to see secure workachoo.com page in browser
 
 
-
-Set up periodical renewal of your SSL/TLS certificate
-By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
-
-You can test renewal command in dry-run mode
+### Set up periodical renewal of your SSL/TLS certificate' By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
 
 sudo certbot renew --dry-run
-Best pracice is to have a scheduled job that to run renew command periodically. Let us configure a cronjob to run the command twice a day.
 
-To do so, lets edit the crontab file with the following command:
+### Scheduled job that to run renew command twice a day.
+
+###To do so, I edited the crontab file with the following command:
 
 crontab -e
-Add following line:
+
 
 * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
-You can always change the interval of this cronjob if twice a day is too often by adjusting schedule expression
+
 
 
 
